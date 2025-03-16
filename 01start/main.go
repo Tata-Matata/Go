@@ -3,20 +3,28 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"helloworld/anotherpackage"
 	"helloworld/doctor"
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 const prompt = " and press ENTER"
 
+// package scoped var
+var packageScopedVar = "This is a package scoped var in main package"
+
 func main() {
-	guessingGame()
+	var blockScopedVar = "This is a block scoped var in main package"
+
+	anotherpackage.MyExportedPrintFunc(packageScopedVar, blockScopedVar)
+
 }
 
 func guessingGame() {
-	random := rand.New(rand.NewSource(123))
+	random := rand.New(rand.NewSource(int64(time.Now().UnixNano())))
 
 	firstNum := random.Intn(8) + 2
 	secondNum := random.Intn(8) + 2
